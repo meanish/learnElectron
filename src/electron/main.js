@@ -1,8 +1,8 @@
-import { app, BrowserWindow, ipcMain } from 'electron'
+import { app, BrowserWindow } from 'electron'
 
 import path from 'path'
-import { isDev } from './util.js'
-import { getStaticData, pollrosource } from './resourceManager.js'
+import { ipcHandle, isDev } from './util.js'
+import { getStaticData, pollRosource } from './resourceManager.js'
 import { getPreloadPath } from './pathResolver.js'
 
 
@@ -23,9 +23,9 @@ const createWindow = () => {
 
         win.loadFile(path.join(app.getAppPath(), '/dist-react/index.html'))
     }
-    pollrosource(win)
+    pollRosource(win)
 
-    ipcMain.handle("getStaticConsole", () => { getStaticData() })
+    ipcHandle("getStaticConsole", () => getStaticData())
 }
 
 

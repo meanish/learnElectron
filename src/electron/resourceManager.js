@@ -3,21 +3,22 @@ import fs from "fs"
 const Polling_Interval = 500;
 import os from 'os'
 import { BrowserWindow } from 'electron';
+import { ipcWebContentSends } from './util.js';
 
 
-export function pollrosource(mainContent) {
+export function pollRosource(mainContent) {
     setInterval(async () => {
         const cpuUsage = await getCpuUsage()
         const getRamUsage = getramUsage()
         const storageData = getStorageData()
         const StaticData = getStaticData()
 
-        // ading the sender
-        mainContent.webContents.send('statistics', {
+        // ading the sender to display ion the browser console
+        ipcWebContentSends('statistics', mainContent.webContents, {
             cpuUsage, getRamUsage, storageData, StaticData
         })
 
-        
+
         // console.log({ cpuUsage, getRamUsage, storageData, StaticData })
     }, Polling_Interval)
 }
