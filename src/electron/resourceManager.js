@@ -1,13 +1,16 @@
 import osUtils from 'os-utils';
 import fs from "fs"
 const Polling_Interval = 500;
+import os from 'os'
+
 
 export function pollrosource() {
     setInterval(async () => {
         const cpuUsage = await getCpuUsage()
         const getRamUsage = getramUsage()
         const storageData = getStorageData()
-        console.log({ cpuUsage, getRamUsage, storageData })
+        const StaticData = getStaticData()
+        console.log({ cpuUsage, getRamUsage, storageData, StaticData })
     }, Polling_Interval)
 }
 
@@ -34,3 +37,15 @@ function getStorageData() {
     }
 }
 
+/* get static info about cpu like name, storage,  */
+
+export function getStaticData() {
+    const totalStorage = getStorageData()
+    const cpuModel = os.cpus()[0].model; //[0] assuming only one cpu, model name in return (eg: Intel Core)
+    const totalMemoryGB = Math.floor(osUtils.totalmem() / 1024); //total memory in gb /1024 for convert mb in gb
+    return {
+        totalStorage,
+        cpuModel,
+        totalMemoryGB
+    }
+} 
