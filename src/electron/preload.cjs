@@ -10,6 +10,8 @@ electron.contextBridge.exposeInMainWorld('electron', {
 
         })
     }, //subscribe to data every 5 sec 
-    getStaticData: () => console.log('static'), //frontend will later go get StaticData
+    // getStaticData: () => console.log('static'), //frontend will later go get StaticData
+
+    getStaticData:()=>electron.ipcRenderer.invoke('getStaticConsole')
 
 })
