@@ -2,15 +2,23 @@ import osUtils from 'os-utils';
 import fs from "fs"
 const Polling_Interval = 500;
 import os from 'os'
+import { BrowserWindow } from 'electron';
 
 
-export function pollrosource() {
+export function pollrosource(mainContent) {
     setInterval(async () => {
         const cpuUsage = await getCpuUsage()
         const getRamUsage = getramUsage()
         const storageData = getStorageData()
         const StaticData = getStaticData()
-        console.log({ cpuUsage, getRamUsage, storageData, StaticData })
+
+        // ading the sender
+        mainContent.webContents.send('statistics', {
+            cpuUsage, getRamUsage, storageData, StaticData
+        })
+
+        
+        // console.log({ cpuUsage, getRamUsage, storageData, StaticData })
     }, Polling_Interval)
 }
 

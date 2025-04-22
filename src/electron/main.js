@@ -23,7 +23,7 @@ const createWindow = () => {
 
         win.loadFile(path.join(app.getAppPath(), '/dist-react/index.html'))
     }
-    pollrosource()
+    pollrosource(win)
 }
 
 
