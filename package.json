@@ -42,6 +42,9 @@
     "directories": {
       "output": "dist"
     },
+    "extraResources": [
+      "src/electron/preload.cjs"
+    ],
     "files": [
       "dist-react",
       "src/electron/main.js"

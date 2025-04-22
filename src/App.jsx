@@ -6,6 +6,10 @@ import './App.css'
 function App() {
   const [count, setCount] = useState(0)
 
+  //consoled in the terminal
+  // this is working just beacuse of the extraResouce==rces placement ion package.json
+  window.electron.getStaticData()
+
   return (
     <>
       <div>
