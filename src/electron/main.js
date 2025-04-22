@@ -3,7 +3,7 @@ import { app, BrowserWindow } from 'electron'
 import path from 'path'
 import { ipcHandle, isDev } from './util.js'
 import { getStaticData, pollRosource } from './resourceManager.js'
-import { getPreloadPath } from './pathResolver.js'
+import { getPreloadPath, getUIPath } from './pathResolver.js'
 
 
 const createWindow = () => {
@@ -21,7 +21,7 @@ const createWindow = () => {
         win.loadURL('http://localhost:5123/')
     } else {
 
-        win.loadFile(path.join(app.getAppPath(), '/dist-react/index.html'))
+        win.loadFile(getUIPath())
     }
     pollRosource(win)
 

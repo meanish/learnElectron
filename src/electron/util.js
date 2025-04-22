@@ -8,8 +8,12 @@ export function isDev() {
 
 // key mwnas what is invoked say "statistics" and handler is the function of the what to return
 export function ipcHandle(key, handler) {
-    ipcMain.handle(key, () => handler())
+    ipcMain.handle(key, (event) => {
+        event.senderFrame //event prevent validation strict
+        handler()
+    })
 }
+
 
 // to send to the browser
 export function ipcWebContentSends(key, webContents, payload) {
