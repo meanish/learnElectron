@@ -1,0 +1,48 @@
+{
+  "name": "reactelectron",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "src/electron/main.js",
+  "scripts": {
+    "dev:react": "vite",
+    "dev:electron": "cross-env NODE_ENV=development electron .",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "dist:mac": "npm run dev:electron && npm run build && electron-builder --mac --arm64",
+    "dist:win": "npm run dev:electron && npm run build && electron-builder --win --x64",
+    "dist:linux": "npm run dev:electron && npm run build && electron-builder --linux --x64"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.22.0",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react-swc": "^3.8.0",
+    "cross-env": "^7.0.3",
+    "electron": "^35.2.0",
+    "electron-builder": "^26.0.12",
+    "eslint": "^9.22.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "globals": "^16.0.0",
+    "vite": "^6.3.1"
+  },
+  "build": {
+    "appId": "com.anishelectron.basicelectron",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "dist-react",
+      "src/electron/main.js"
+    ],
+    "win": {
+      "target": "nsis"
+    }
+  }
+}
