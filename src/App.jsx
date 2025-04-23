@@ -10,12 +10,17 @@ function App() {
   // this is working just beacuse of the extraResouce==rces placement ion package.json
   // window.electron.getStaticData()
 
+  // to subscribe
+  // useEffect(() => {
+  //   window.electron.subscribeStatistics((stats) => console.log(stats))
+  // }, [])
 
+
+  // to unsubscribe
   useEffect(() => {
-    window.electron.subscribeStatistics((stats) => console.log(stats))
-
+    const unsub = window.electron.subscribeStatistics((stats) => console.log(stats))
+    return unsub
   }, [])
-
 
 
   return (

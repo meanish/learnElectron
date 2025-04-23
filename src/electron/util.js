@@ -11,7 +11,7 @@ export function isDev() {
 export function ipcHandle(key, handler) {
     ipcMain.handle(key, (event) => {
         validateEventFrame(event.senderFrame) //event prevent validation strict
-        handler()
+        return handler()
     })
 }
 
@@ -23,8 +23,8 @@ export function ipcWebContentSends(key, webContents, payload) {
 
 /* checking if the source providing the data to the ipc is from true source */
 export function validateEventFrame(frame) {
-    console.log("Actual host url", frame.url)
-    // checking if in dev enveironement && .url.host cuts all the https and left with the localhost
+    console.log("Actual host url", frame.url, "isDEv", isDev)
+    // checking if in dev ecnveironement && .url.host cuts all the https and left with the localhost
     if (isDev() && new URL(frame.url).host === "localhost:5123") {
         return;
     }

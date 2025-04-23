@@ -20,7 +20,6 @@ const createWindow = () => {
     if (isDev()) {
         win.loadURL('http://localhost:5123/')
     } else {
-
         win.loadFile(getUIPath())
     }
     pollRosource(win)
