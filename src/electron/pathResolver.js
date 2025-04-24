@@ -1,5 +1,5 @@
 import path from 'path'
-// import { isDev } from './util'
+// import { isDev } from './util.js'
 import { app } from 'electron'
 
 export function getPreloadPath() {
@@ -11,4 +11,9 @@ export function getPreloadPath() {
 
 export function getUIPath() {
     return path.join(app.getAppPath(), '/dist-react/index.html')
+}
+
+
+export function getIconPath() {
+    return path.join(app.getAppPath(), 'src/assets')
 }

@@ -1,9 +1,9 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, Tray } from 'electron'
 
 import path from 'path'
 import { ipcHandle, isDev } from './util.js'
 import { getStaticData, pollRosource } from './resourceManager.js'
-import { getPreloadPath, getUIPath } from './pathResolver.js'
+import { getIconPath, getPreloadPath, getUIPath } from './pathResolver.js'
 
 
 const createWindow = () => {
@@ -25,6 +25,9 @@ const createWindow = () => {
     pollRosource(win)
 
     ipcHandle("getStaticConsole", () => getStaticData())
+
+    // icon tray for ios and win
+    new Tray(path.join(getIconPath(), process.platform === "darwin" ? "icons8(ios)" : "icons8(win).png"))
 }
 
 
