@@ -1,9 +1,9 @@
 import { app, BrowserWindow, Tray } from 'electron'
 
-import path from 'path'
 import { ipcHandle, isDev } from './util.js'
 import { getStaticData, pollRosource } from './resourceManager.js'
 import { getIconPath, getPreloadPath, getUIPath } from './pathResolver.js'
+import { createTray } from './tray.js'
 
 
 const createWindow = () => {
@@ -27,7 +27,9 @@ const createWindow = () => {
     ipcHandle("getStaticConsole", () => getStaticData())
 
     // icon tray for ios and win
-    new Tray(path.join(getIconPath(), process.platform === "darwin" ? "icons8(ios)" : "icons8(win).png"))
+    // new Tray(path.join(getIconPath(), process.platform === "darwin" ? "icons8(ios)" : "icons8(win).png"))
+    createTray(win)
+
 
 
     // prevent tray to diapear even after app closes
