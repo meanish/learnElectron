@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import RenderLineChart from './components/recharts'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -17,15 +18,17 @@ function App() {
 
 
   // to unsubscribe
-  useEffect(() => {
-    const unsub = window.electron.subscribeStatistics((stats) => console.log(stats))
-    return unsub
-  }, [])
+  // useEffect(() => {
+  //   const unsub = window.electron.subscribeStatistics((stats) => console.log(stats))
+  //   return unsub
+  // }, [])
 
 
   return (
     <>
       <div>
+        123
+        <div className="div" style={{ width: "100%" }}><RenderLineChart /></div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
