@@ -60,7 +60,8 @@ function ipcOn(key, callback) {
     electron.ipcRenderer.on(key, cb)
 
     // to unsubscribe
-    electron.ipcRenderer.off(key, cb)
+    return () => electron.ipcRenderer.off(key, cb)
+    // or use .removeListener('statistics', cb);
 
 }
 

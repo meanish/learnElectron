@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from 'react'
 
-const UseStatistics = (dataCount) => {
+export function useStatistics(dataCount) {
     const [value, setValue] = useState([])
+
 
     useEffect(() => {
         const unsub = window.electron.subscribeStatistics((stats) => {
             setValue((pre) => {
-                return [...pre, stats]
+                const newData = [...pre, stats];
+
+                // basically if the newData is bigger than the count remove the top value fro array
+                if (newData.length > dataCount) {
+                    newData.shift()
+                }
+                return newData
             })
         })
         return unsub
@@ -16,4 +23,3 @@ const UseStatistics = (dataCount) => {
     return value
 }
 
-export default UseStatistics

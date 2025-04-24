@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import RenderLineChart from './components/recharts'
+import { useStatistics } from './electron/useStatistics'
+import Charts from './components/charts'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -24,11 +26,24 @@ function App() {
   // }, [])
 
 
+
+  const statisticValue = useStatistics(10)
+  const cpuUsage = useMemo(() => statisticValue.map((stat) => {
+
+    return ({
+      value: stat.cpuUsage * 100
+    })
+
+  }), [statisticValue])
+
+
+  console.log(statisticValue, "cpuUsage", cpuUsage)
   return (
     <>
       <div>
         123
-        <div className="div" style={{ width: "100%" }}><RenderLineChart /></div>
+        <div className="charts" style={{ height: "100px" }}><Charts data={cpuUsage} /> </div>
+        {/* <div className="div" style={{ width: "100%" }}><RenderLineChart /></div> */}
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
