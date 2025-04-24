@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -28,20 +28,26 @@ function App() {
 
 
   const statisticValue = useStatistics(10)
-  const cpuUsage = useMemo(() => statisticValue.map((stat) => {
+  const cpuUsage = useMemo(() => {
 
-    return ({
-      value: stat.cpuUsage * 100
+    // *100 to make it sure the value is not in points
+    const points = statisticValue.map((stat) => {
+      return ({ value: stat.cpuUsage * 100 })
+
     })
+    return [
+      ...points,
+      ...Array.from({ length: 10 - points.length }).map(() => ({ value: undefined })) //just making sure it is 10 array from the begging in case of empty replce all with the undefined this is done to prevent the unusual start at the begging of the plot
+    ]
 
-  }), [statisticValue])
+  }
+    , [statisticValue])
 
 
   console.log(statisticValue, "cpuUsage", cpuUsage)
   return (
     <>
       <div>
-        123
         <div className="charts" style={{ height: "100px" }}><Charts data={cpuUsage} /> </div>
         {/* <div className="div" style={{ width: "100%" }}><RenderLineChart /></div> */}
         <a href="https://vite.dev" target="_blank">
