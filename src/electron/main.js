@@ -4,6 +4,7 @@ import { ipcHandle, isDev } from './util.js'
 import { getStaticData, pollRosource } from './resourceManager.js'
 import { getIconPath, getPreloadPath, getUIPath } from './pathResolver.js'
 import { createTray } from './tray.js'
+import { createMenu } from './menu.js'
 
 
 const createWindow = () => {
@@ -13,7 +14,8 @@ const createWindow = () => {
         // this can be checked in the dev tools console throug windows.electron.say(subscribeStatistics(()=>console.log(1)))
         webPreferences: {
             preload: getPreloadPath(),
-        }
+        },
+        frame: false,
     })
 
     /* if main window ruun local vite else run production file */
@@ -38,6 +40,9 @@ const createWindow = () => {
 
     // })
     handleCloseEvents(win)
+
+    // 
+    createMenu(win)
 
     /* 
     Q. How to actually close electron
