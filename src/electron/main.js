@@ -15,7 +15,8 @@ const createWindow = () => {
         webPreferences: {
             preload: getPreloadPath(),
         },
-        frame: false,
+        // f11 fuction in electron
+        // frame: false,
     })
 
     /* if main window ruun local vite else run production file */
