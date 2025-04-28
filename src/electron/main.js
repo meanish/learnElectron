@@ -82,4 +82,11 @@ const createWindow = () => {
 
 app.whenReady().then(() => {
     createWindow()
-}) 
+})
+
+app.on('window-all-closed', () => {
+    // Do not quit if in test mode
+    if (process.env.NODE_ENV !== 'test') {
+        app.quit();
+    }
+});
